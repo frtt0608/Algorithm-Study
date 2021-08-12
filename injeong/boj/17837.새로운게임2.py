@@ -69,10 +69,10 @@ if __name__ == '__main__' :
                     pins[k-1][1] = ny
             return
 
-        printf(maps)
-        printf(maps_pin)
-        printf(pins)
-        print("시작")
+        #printf(maps)
+        #printf(maps_pin)
+        #printf(pins)
+        #print("시작")
 
         def finish():
             for p in range(N):
@@ -81,21 +81,19 @@ if __name__ == '__main__' :
                         return True
             return False
         turn = 0
-        while True:
-            if finish():
-                print(turn)
-                break
+        going = True
+        while going:
             if turn >= 1000 :
-                print(-1)
+                turn = -1
                 break
             for i in range(K):
                 pin_data = pins[i]
                 move(i+1, pin_data)
+                if finish():
+                    going = False
+                    break
             turn += 1
             #printf(maps)
             #printf(maps_pin)
             #printf(pins)
-            #print("***turn 종료***")
-
-
-        print(tc)
+        print(tc, turn)
