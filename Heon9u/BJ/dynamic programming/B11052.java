@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 // Combination table
-public class Main {
+public class B11052 {
     static int N;
     static int[] cards;
 
