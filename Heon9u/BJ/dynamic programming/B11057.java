@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 // Combination table
-public class Main {
+public class B11057 {
     static int N;
 
     public static long getASCNumber() {
