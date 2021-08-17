@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 // Combination table
-public class Main {
+public class B1010 {
     static final int MAX = 30;
     static int N, M;
     static int[][] table;
