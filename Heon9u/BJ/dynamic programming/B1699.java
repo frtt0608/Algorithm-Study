@@ -1,8 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
-    // static int N;
+public class B1699 {
 
     public static int getMinNumber(int N) {
         int[] table = new int[N+1];
