@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class B9465 {
     static int N;
 
     public static int detachedStickers(int[][] stickers) {
