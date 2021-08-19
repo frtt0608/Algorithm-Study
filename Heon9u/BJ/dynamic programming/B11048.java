@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class B11048 {
 
     public static void getTotalCase(int[][] map, int N, int M) {
         for(int i=1; i<N+1; i++) {
