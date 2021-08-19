@@ -1,8 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
-    // static int N;
+public class B2133 {
 
     public static int getTotalCase(int N) {
         int[] table = new int[N+1];
