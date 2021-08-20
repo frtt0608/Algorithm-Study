@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class B1309 {
 
     public static int getTotalCase_lionPutInCage(int N) {
         final int MODE = 9901;
@@ -19,7 +19,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        // StringTokenizer st = new StringTokenizer(br.readLine());
 
         int N = Integer.parseInt(br.readLine());
         System.out.println(getTotalCase_lionPutInCage(N));
