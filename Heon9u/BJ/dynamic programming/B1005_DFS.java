@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class B1005_DFS {
     static int N;
     static int[] timer, minTable;
     static List<Integer>[] nextOrders;
