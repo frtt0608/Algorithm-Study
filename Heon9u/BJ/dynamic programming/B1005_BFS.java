@@ -1,20 +1,36 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
-    static int N;
-    static int[] timer, minTable;
+public class B1005_BFS {
+    static int N, W;
+    static int[] nextCnt, timer, minTable;
     static List<Integer>[] nextOrders;
 
-    public static int getMinTime(int cur) {
-        if(minTable[cur] != -1) return minTable[cur];
-
-        int maxTime = 0;
-        for(int next: nextOrders[cur]) {
-            maxTime = Math.max(maxTime, getMinTime(next));
+    public static void getStartPoint(Queue<Integer> que) {
+        for(int i=1; i<N+1; i++) {
+            if(nextCnt[i] == 0) {
+                que.offer(i);
+                minTable[i] = timer[i];
+            }
         }
+    }
 
-        return minTable[cur] = maxTime + timer[cur];
+    public static void getMinTime() {
+        Arrays.fill(minTable, -1);
+        Queue<Integer> que = new LinkedList<>();
+        getStartPoint(que);
+
+        while(!que.isEmpty()) {
+            int cur = que.poll();
+            if(cur == W) return;
+
+            for(int next: nextOrders[cur]) {
+                nextCnt[next] -= 1;
+                minTable[next] = Math.max(minTable[next], minTable[cur] + timer[next]);
+                if(nextCnt[next] == 0)
+                    que.offer(next);
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -30,7 +46,7 @@ public class Main {
             
             timer = new int[N+1];
             minTable = new int[N+1];
-            Arrays.fill(minTable, -1);
+            nextCnt = new int[N+1];
 
             st = new StringTokenizer(br.readLine());
             for(int i=1; i<N+1; i++) {
@@ -47,11 +63,12 @@ public class Main {
                 int cur = Integer.parseInt(st.nextToken());
                 int next = Integer.parseInt(st.nextToken());
 
-                nextOrders[next].add(cur);
+                nextOrders[cur].add(next);
+                nextCnt[next] += 1;
             }
 
-            int W = Integer.parseInt(br.readLine());
-            getMinTime(W);
+            W = Integer.parseInt(br.readLine());
+            getMinTime();
 
             System.out.println(minTable[W]);
         }
