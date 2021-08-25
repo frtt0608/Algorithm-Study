@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 구간 합 구하기5
+public class B11660 {
     static int N;
 
     public static void main(String[] args) throws IOException {
