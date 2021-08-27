@@ -6,11 +6,8 @@
 0 또는 양의 정수가 담긴 배열 numbers가 매개변수로 주어질 때, 
 순서를 재배치하여 만들 수 있는 가장 큰 수를 문자열로 바꾸어 return
 '''
-
-if __name__ == '__main__':
-    def solution(numbers):
-        answer = '0'
-        # 순열
+'''
+        # 순열 : 시간이 너무 오바됨.
         array = [] # 임시 결과
         def dfs(elements):
             # 만들어야 할 배열
@@ -28,8 +25,23 @@ if __name__ == '__main__':
                     dfs(next_el)
                     array.pop()
         dfs(numbers) # [6, 10, 2]
+'''
+
+if __name__ == '__main__':
+    def solution(numbers):
+        max_len = len(str(sorted(numbers)[-1]))
+        numbers = list(map(str, numbers))
+        print(numbers, max_len)
+        numbers.sort(key=lambda x : x*max_len, reverse=True)
+        print(numbers)
+        
+        if numbers[0] == '0' :
+            return "0"
+        answer = ''.join(numbers)
+
 
         return answer
     
     print(solution([6, 10, 2]), "6210")
     print(solution([3, 30, 34, 5, 9]),"9534330")
+    print(solution([0, 0]),"0")
