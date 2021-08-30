@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 열쇠
+public class B9328 {
     static int h, w, documentCnt;
     static int[] dx = {1,0,-1,0}, dy = {0,1,0,-1};
     static boolean[] keys;
