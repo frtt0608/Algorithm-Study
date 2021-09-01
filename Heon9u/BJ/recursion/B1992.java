@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class B1992 {
     static StringBuilder sb;
     static int[][] video;
 
