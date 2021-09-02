@@ -2,63 +2,61 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static StringBuilder sb;
-    static int[][] video;
+    static int[] paperCnt;
+    static int[][] paper;
 
-    public static boolean checkSameNumber(int N, int x, int y) {
-        int initNum = video[x][y];
+    public static void addPaperCnt(int[] cnt) {
+        for(int i=0; i<3; i++) {
+            paperCnt[i] += cnt[i];
+        }
+    }
 
-        for(int i=x; i<x+N; i++) {
-            for(int j=y; j<y+N; j++) {
-                if(initNum != video[i][j]) {
-                    
-                    return false;
-                }
+    public static int cuttingPaperArr(int N, int x, int y) {
+
+        if(N == 1) return paper[x][y];
+
+        int[] tempCnt = new int[3];
+        for(int i=0; i<3; i++) {
+            for(int j=0; j<3; j++) {
+                int nNum = cuttingPaperArr(N/3, x+i*N/3, y+j*N/3);
+                if(nNum != -1) tempCnt[nNum] += 1;
             }
         }
 
-        sb.append(initNum);
-        return true;
-    }
-
-    public static void compressedVideoArr(int N, int x, int y) {
-
-        if(N == 1) {
-            // System.out.println(N+": "+x+", "+y);
-            sb.append(video[x][y]);
-            return;
+        for(int i=0; i<3; i++) {
+            if(tempCnt[i] == 9) return i;
         }
 
-        boolean isSame = checkSameNumber(N, x, y);
-        
-        if(!isSame) {
-            sb.append("(");
-            compressedVideoArr(N/2, x, y);
-            compressedVideoArr(N/2, x, y+N/2);
-            compressedVideoArr(N/2, x+N/2, y);
-            compressedVideoArr(N/2, x+N/2, y+N/2);
-            sb.append(")");
-        }
+        addPaperCnt(tempCnt);
+        return -1;
     }
 
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        // StringTokenizer st;
 
         int N = Integer.parseInt(br.readLine());
-        video = new int[N][N];
-        sb = new StringBuilder();
+        paper = new int[N][N];
+        paperCnt = new int[3];
 
         for(int i=0; i<N; i++) {
-            String[] input = br.readLine().split("");
+            String[] input = br.readLine().split(" ");
             for(int j=0; j<N; j++) {
-                video[i][j] = Integer.parseInt(input[j]);
+                paper[i][j] = Integer.parseInt(input[j]) + 1;
             }
         }
 
-        compressedVideoArr(N, 0, 0);
-        System.out.println(sb.toString());
+        int num = cuttingPaperArr(N, 0, 0);
+        if(num != -1) paperCnt[num] += 1;
+
+        printResultArr();
         br.close();
+    }
+
+    public static void printResultArr() {
+        for(int cnt: paperCnt) {
+            System.out.println(cnt);
+        }
     }
 }
