@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// Z
+public class B1074 {
     static int r, c, order;
 
     public static void getTargetLocation(int N, int x, int y) {
