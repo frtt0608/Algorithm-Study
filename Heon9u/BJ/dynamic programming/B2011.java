@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 암호코드
+public class B2011 {
     static int N;
 
     public static int getTotalCase(String input) {
