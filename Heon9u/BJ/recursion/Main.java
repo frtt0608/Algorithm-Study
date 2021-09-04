@@ -2,38 +2,65 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int r, c, order;
-
-    public static void getTargetLocation(int N, int x, int y) {
-        if(N == 0) return;
-
-        if(r < x+N && c >= y+N) {
-            y += N;
-            order += N*N;
-        } else if(r >= x+N && c < y+N) {
-            x += N;
-            order += N*N*2;
-        } else if(r >= x+N && c >= y+N) {
-            x += N;
-            y += N;
-            order += N*N*3;
-        }
-
-        getTargetLocation(N/2, x, y);
-    }
 
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringTokenizer st;
 
-        int N = Integer.parseInt(st.nextToken());
-        N = (int) Math.pow(2, N);
-        r = Integer.parseInt(st.nextToken());
-        c = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(br.readLine());
+        int[][] paper = new int[N][N];
+        
+        for(int i=0; i<N; i++) {
+            st = new StringTokenizer(br.readLine());
+            for(int j=0; j<N; j++) {
+                paper[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
 
-        getTargetLocation(N/2, 0, 0);
-        System.out.println(order);
+        CuttingPaper cuttingPaper = new CuttingPaper(N, paper);
+        cuttingPaper.cuttingPaperWithColor(paper, N, 0, 0);
+        cuttingPaper.printPaperCnt();
+
         br.close();
+    }
+}
+
+class CuttingPaper {
+    int N;
+    int[] paperCnt;
+    int[][] paper;
+
+    CuttingPaper(int N, int[][] paper) {
+        this.N = N;
+        this.paper = paper;
+        this.paperCnt = new int[2];
+    }
+
+    public void cuttingPaperWithColor(int[][] paper, int N, int x, int y) {
+
+        if(N == 1) {
+            paperCnt[paper[x][y]] += 1;
+            return;
+        }
+
+        int initColor = paper[x][y];
+        for(int i=x; i<x+N; i++) {
+            for(int j=y; j<y+N; j++) {
+                if(initColor != paper[i][j]) {
+                    cuttingPaperWithColor(paper, N/2, x, y);
+                    cuttingPaperWithColor(paper, N/2, x, y+N/2);
+                    cuttingPaperWithColor(paper, N/2, x+N/2, y);
+                    cuttingPaperWithColor(paper, N/2, x+N/2, y+N/2);
+                    return;
+                }
+            }
+        }
+
+        paperCnt[initColor] += 1;
+    }
+
+    public void printPaperCnt() {
+        System.out.println(paperCnt[0]+"\n"+paperCnt[1]);
     }
 }
