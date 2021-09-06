@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 카드 정렬하기
+public class B1715 {
 
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
