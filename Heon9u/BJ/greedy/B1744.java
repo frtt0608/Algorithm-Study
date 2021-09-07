@@ -1,7 +1,11 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 양수: 두 숫자 중 1이 있으면 바로 더하기
+// 남은 양수는 바로 더하기
+// 음수는 작은 것부터 묶기
+// 0이 나오면 남는 음수랑 묶어서 처리
+public class B1744 {
     
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
