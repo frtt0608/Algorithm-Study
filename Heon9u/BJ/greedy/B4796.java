@@ -1,7 +1,8 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 캠핑
+public class B4796 {
     
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
