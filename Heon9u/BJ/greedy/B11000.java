@@ -1,8 +1,11 @@
 import java.util.*;
 import java.io.*;
 
-// 최소의 강의실로 모든 수업 끝내기
-public class Main {
+// 강의실 배정
+// 비교 대상인 강의 시작시간과 현재 강의에 최소 종료시간을 비교하여 갭을 최소로,
+// 입력값을 시작시간으로 오름차순 정렬이 관건.
+// 우선순위 큐
+public class B11000 {
     
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
