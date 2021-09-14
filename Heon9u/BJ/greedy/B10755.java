@@ -1,7 +1,10 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 공항
+// 분리집합, path compression
+// 중간 탐색 과정이 없기 때문에 단순한 반복문보다 빠르다.
+public class B10755 {
     
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
