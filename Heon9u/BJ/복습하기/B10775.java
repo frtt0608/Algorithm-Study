@@ -1,7 +1,9 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 공항
+// 분리집합, path compression
+public class B10775 {
     static int[] gateState;
 
     public static int getParentGateNumber(int gate) {
