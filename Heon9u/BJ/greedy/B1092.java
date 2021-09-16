@@ -1,7 +1,10 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 배
+// 리스트와 정렬, 배열은 이중 반복문x
+// 리스트의 제거와 인덱스 관리로 최대한 반복횟수 줄이기
+public class B1092 {
 
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
