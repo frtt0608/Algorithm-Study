@@ -1,7 +1,9 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+// 통나무 건너뛰기
+// 정렬과 투 포인터
+public class B11497 {
 
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
