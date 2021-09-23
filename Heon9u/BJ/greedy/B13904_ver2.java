@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class B13904_ver2 {
 
     public static int getTotalScoreInWorks(List<Work> works) {
         int[] scores = new int[1001];
