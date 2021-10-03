@@ -1,8 +1,9 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
-
+// 주식
+// 역으로 생각하기
+public class B11501 {
 
     public static void main(String[] args) throws IOException {
         System.setIn(new FileInputStream("input.txt"));
