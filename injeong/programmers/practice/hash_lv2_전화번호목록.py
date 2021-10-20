@@ -27,7 +27,6 @@
 
 def solution(phone_book):
     phone_book.sort(key=len) # 정렬한 다음,
-    print(phone_book)
     dicts = {}
     len_lists = []
     answer = True
@@ -35,6 +34,8 @@ def solution(phone_book):
         # add to dictionary & list
         now_phone = phone_book[i]
         dicts[now_phone] = []
+        # 모두 비교하는 것이 아니라,
+        # 앞서있는 len 만큼만 비교해서 넣으면 된다.
         for l in len_lists:
             if now_phone[0:l] != now_phone and now_phone[0:l] in dicts.keys():
                 dicts[now_phone].append(now_phone[0:l])
