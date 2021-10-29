@@ -15,21 +15,25 @@ Sol)
 def solution(k, dungeons):
     l = len(dungeons)
     
-    def perm(n, curr):
+    def perm(n, curr, tired, cnt):
         # n개 순서대로 정렬
+        nonlocal answer
+        if cnt >= answer :
+            answer = cnt
         if curr == n :
-            print(visited)
+            # print(visited)
             return
         for i in range(n):
             if i not in visited:
-                visited.append(i)
-                perm(n, curr+1)
-                visited.pop(-1)
+                if tired >= dungeons[i][0]:
+                    visited.append(i)
+                    perm(n, curr+1, tired-dungeons[i][1], cnt+1)
+                    visited.pop(-1)
         return
 
     answer = -1
     visited = []
-    perm(l, 0)
+    perm(l, 0, k, 0)
     return answer
 
 print(solution(80, [[80,20],[50,40],[30,10]]), 3)
