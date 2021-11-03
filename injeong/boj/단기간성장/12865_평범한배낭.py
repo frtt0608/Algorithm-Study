@@ -17,19 +17,30 @@ if __name__=='__main__':
     for i in range(N):
         objects.append(list(map(int, input().split(' '))))
     objects = sorted(objects)
-    print(objects)
+    # print(objects)
 
+    result = 0
     # 1. 1개~N개까지 고르는 조합
-    def comb(r, curr):
+    def comb(r, curr, total_weight, total_value):
+        global result
+        if total_weight > K:
+            return
         if r==0:
-            print(visited)
+            # print(visited)
+            if total_value >= result:
+                result = total_value
             return
         for i in range(curr, N):
             if i not in visited:
                 visited.append(i)
-                comb(r-1, i)
+                weight = objects[i][0]
+                value = objects[i][1]
+                comb(r-1, i, total_weight+weight, total_value+value)
                 visited.pop(-1)
         return
     for i in range(1, N+1):
         visited = []
-        comb(i, 0)
+        total_weight = 0
+        total_value = 0
+        comb(i, 0, 0, 0)
+    print(result)
