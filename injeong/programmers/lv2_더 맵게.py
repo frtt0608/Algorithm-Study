@@ -4,22 +4,26 @@
 Question) 반복한 횟수 return
 * 모든 음식의 스코빌 지수를 K 이상으로 만들 수 없는 경우에는 -1을 return
 '''
+# https://www.daleseo.com/python-heapq/
+import heapq
 def solution(scoville, K):
-    scoville = sorted(scoville, reverse=True)
-    
+    heap = []
+    for num in scoville:
+        heapq.heappush(heap, num)
+
     answer = 0
-    while len(scoville)>=2:
-        if scoville[-1] < K:
-            f = scoville.pop(-1)
-            s = scoville.pop(-1)
+    while len(heap)>=2:
+        if heap[0] < K: # 삭제하지 않고 원소 가져오기
+            f = heapq.heappop(heap) # 원소 가져오면서 삭제
+            s = heapq.heappop(heap)
             new = f + s*2
-            scoville.append(new)
+            heapq.heappush(heap, new) # push 후 자동 정렬
             answer += 1
-            scoville = sorted(scoville, reverse=True)
         else:
             break
+    # print(heap)
 
-    if len(scoville)==1 and scoville[-1]<K:
+    if len(heap)==1 and heap[0]<K:
         return -1
     else:
         return answer
