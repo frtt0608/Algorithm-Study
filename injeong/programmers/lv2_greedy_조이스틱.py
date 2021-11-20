@@ -1,44 +1,59 @@
+'''
+조이스틱으로 알파벳 이름을 완성하세요.
+▲ - 다음 알파벳
+▼ - 이전 알파벳 (A에서 아래쪽으로 이동하면 Z로)
+◀ - 커서를 왼쪽으로 이동 (첫 번째 위치에서 왼쪽으로 이동하면 마지막 문자에 커서)
+▶ - 커서를 오른쪽으로 이동
+
+맨 처음에 A*len(완성해야 할 글자수)가 주어진다.
+이름에 대해 조이스틱 조작 횟수의 최솟값을 return
+'''
+
 def solution(name):
-    # print(ord('N')-ord('A')+1, ord('Z')-ord('N')+1) #65, 90 : 26개 - mid:N(14)
-    base = 'A'*len(name)
-    make_name_idx = [x for x in range(len(name)) if base[x] != name[x]]
-    print(make_name_idx)
-    n = len(name)
-    def ordering(data):
-        result = []
-        now, nxt, last = 0, 1, len(data)-1 
-        while data:
-            result.append(data[now])
-            if data[nxt]-data[now] > (data[now]-data[last])%len(data):
-                result.append(data[last])
-                data.remove(data[now])
-                data.remove(data[last-1])
-                now = last-1
-                last = nxt-1
-                nxt = now-1
-            else:
-                result.append(data[nxt])
-                data.remove(data[now])
-                data.remove(data[nxt-1])
-                now = 0
-                nxt = 1
-                last = last-2
-        return result
-    # print(ordering(make_name_idx))
-    
+    # 각 자리에선,
+        # 위, 아래 동시 움직이다가 원하는 결과 찾으면 stop
+    # 자리 이동에선,
+        # visited check하면서 우, 좌 동시에 움직이다가 visited=False인 곳에서 stop
     answer = 0
-    for i in range(len(make_name_idx)):
-        idx = make_name_idx[i]
-        word = name[idx]
-        if i==0:
-            if idx!=0:
-                answer += idx
-        else:
-            b_idx = make_name_idx[i-1]
-            # print(idx-b_idx,1+(n-1-idx))
-            answer += min(idx-b_idx, 1+(n-1-idx))
-        print('a', answer)
-        answer += min(ord(word)-ord('A'), ord('Z')-ord(word)+1)
-        print('b', answer)
-        
+    n = len(name)
+    operated = [True]*n # 조작 할 필요성에 대한 여부
+    pre_idx = 0
+    now_idx = 0
+    while True:
+        word = name[now_idx]
+        alpha_cnt, moving_cnt = 0, 0
+        print(word, pre_idx, now_idx)
+        if word != 'A':
+            alpha_cnt = min(ord(word)-ord('A'), 26-(ord(word)-ord('A')))
+            moving_cnt = min(abs(now_idx-pre_idx), n-abs(now_idx-pre_idx))
+            pre_idx = now_idx
+        operated[now_idx] = False # 조작완료
+        answer += alpha_cnt
+        answer += moving_cnt
+
+        if operated == [False]*n :
+            break
+        print(operated)
+
+        j = 1
+        tmp_idx = now_idx
+        while now_idx+j < n:
+            if name[now_idx+j]!='A' and operated[now_idx+j]==True:
+                tmp_idx = now_idx+j
+                break
+            elif name[now_idx+j]!='A' and operated[now_idx-j]==True:
+                tmp_idx = n+now_idx-j
+                break
+            else:
+                j += 1
+        now_idx = tmp_idx
+
+
     return answer
+
+# print(solution("JAZ"),11)
+# print(solution("JAZAA"),12)
+# print(solution("JEROEN"),56)
+# print(solution("JAN"),23)
+print(solution("ABAAAAAAAAABB"),7)
+print(solution("ZAAAZZZZZZZ"),15)
