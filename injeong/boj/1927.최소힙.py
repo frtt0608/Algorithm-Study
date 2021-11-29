@@ -9,11 +9,12 @@ sys.stdin = open("input_1129.txt", "r")
 '''
 
 if __name__ == '__main__':
+    import sys
     import heapq
     # 최소 힙 트리
-    heap = [] # 변수명은 무조건 heap. 일반 리스트는 heapify로 힙 자료형으로 변경 해줘야 함
+    heap = [] # 일반 리스트는 heapify로 힙 자료형으로 변경 해줘야 함
     for tc in range(int(input())):
-        n = int(input())
+        n = int(sys.stdin.readline())
         if n != 0:
             heapq.heappush(heap, n)
         elif heap==[]:
